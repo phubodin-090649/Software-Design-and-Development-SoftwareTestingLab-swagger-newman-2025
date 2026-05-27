@@ -519,12 +519,12 @@ npm run dev
 4. **คัดลอก token** จาก Response body
 
 ```
-Response Code         : ______
-Token (15 ตัวแรก)     : ______________________________...
+Response Code         : 200
+Token (15 ตัวแรก)     : eyJhbGciOiJIUzI...
 ```
 
 ### 📸 แทรกภาพหน้าจอ Swagger UI — POST /api/login Response ที่นี่
-![Swagger UI-POST /api/login response](images/swagger-UI-Response.png)
+![Swagger UI-POST /api/login response]![alt text](image-1.png)![alt text](image-2.png)
 ---
 
 **ขั้นที่ 2 — ตั้งค่า Authorization**
@@ -539,14 +539,14 @@ Token (15 ตัวแรก)     : ______________________________...
 
 | Endpoint | Method | Auth | Expected Code | Actual Code |
 |----------|--------|:----:|:------------:|:-----------:|
-| `/api/bookings` | POST | ❌ | 201 | |
-| `/api/bookings` | GET | ✅ | 200 | |
-| `/api/bookings/1` | GET | ✅ | 200 หรือ 404 | |
-| `/api/bookings/1` | PUT | ✅ | 200 หรือ 404 | |
-| `/api/bookings/1` | DELETE | ✅ | 200 หรือ 404 | |
-
+| `/api/bookings` | POST | ❌ | 201 | 201 |
+| `/api/bookings` | GET | ✅ | 200 | 200 |
+| `/api/bookings/1` | GET | ✅ | 200 หรือ 404 | 200 |
+| `/api/bookings/1` | PUT | ✅ | 200 หรือ 404 | 200 |
+| `/api/bookings/1` | DELETE | ✅ | 200 หรือ 404 | 200 |
+ 
 ### 📸 แทรกภาพหน้าจอ Swagger UI — GET /api/bookings Response ที่นี่
-![Swagger UI-POST /api/bookings response]('images/swagger-UI-Response.png')
+![Swagger UI-POST /api/bookings response]![alt text](image-3.png)![alt text](image-4.png)![alt text](image-5.png)![alt text](image-6.png)![alt text](image-7.png)
 ---
 
 **ขั้นที่ 4 — ทดสอบกรณีไม่มี Token**
@@ -554,8 +554,8 @@ Token (15 ตัวแรก)     : ______________________________...
 กดปุ่ม **Authorize** → **Logout** → **Close** แล้วลอง GET /api/bookings ใหม่:
 
 ```
-Response Code เมื่อไม่มี Token : ______
-Error message ที่ได้รับ        : ______________________________
+Response Code เมื่อไม่มี Token : 401
+Error message ที่ได้รับ        : "error": "กรุณาเข้าสู่ระบบก่อน"
 ```
 
 ---
@@ -614,7 +614,7 @@ LoginResponse: {
 ```
 
 📸 แทรกภาพหน้าจอ Swagger UI ที่แสดง Schema `LoginResponse` ใน Models section:
-![Swagger UI-POST LoginResponse](images/swagger-UI-Response.png)
+![Swagger UI-POST LoginResponse]![alt text](image-8.png)
 > ___
 
 ---
@@ -653,7 +653,7 @@ app.get('/api/health', (req, res) => {
 ```
 
 📸 แทรกภาพหน้าจอ Swagger UI ที่แสดง /api/health endpoint และ Response จริง:
-![Swagger UI-health check](images/swagger-UI-Response.png)
+![Swagger UI-health check]![alt text](image-9.png)![alt text](image-10.png)
 > ___
 
 ---
@@ -670,9 +670,9 @@ app.get('/api/health', (req, res) => {
 Login ใน Swagger UI → Authorize → รอ 6 วินาที → ลอง GET /api/bookings:
 
 ```
-Response Code หลัง token หมดอายุ : ______
-Error message                    : ______________________________
-ข้อแตกต่างระหว่าง 401 กับ 403   : ______________________________
+Response Code หลัง token หมดอายุ : 403
+Error message                    : "error": "Token ไม่ถูกต้องหรือหมดอายุ"
+ข้อแตกต่างระหว่าง 401 กับ 403   : 401 คือ ยังไม่ได้ล็อกอิน 403 คือ ไม่ถูกต้องหรือหมดอายุ
 ```
 
 > แก้กลับเป็น `'1h'` ก่อนทำส่วนที่ 2
